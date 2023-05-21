@@ -6,6 +6,8 @@
 #include "YoungNinja.hpp"
 #include "TrainedNinja.hpp"
 
+#ifndef TEAM_HPP
+#define TEAM_HPP
 namespace ariel
 {
     class Team
@@ -13,10 +15,21 @@ namespace ariel
     private:
         std::vector<Character *> m_members;
         Character *leader;
+        bool isDead = false;
+
+    protected:
+        Character *getLeader() const { return leader; }
+
     public:
-      
-        Team(Character *initialMember) {
+        Team(Character *initialMember)
+        {
+            if(initialMember->getisLeader())
+            {
+                std::__throw_runtime_error("Character cant be leader of two diffrent teams");
+            }
             leader = initialMember;
+            leader->setisLeader();
+            add(leader);
         }
 
         // Copy constructor
@@ -43,24 +56,39 @@ namespace ariel
             return *this;
         }
 
-        ~Team()
+        virtual ~Team()
         {
             for (Character *member : m_members)
             {
-                member = m_members.back();
-                m_members.pop_back();
-                delete member;
+                if (member != nullptr)
+                {
+                    member = m_members.back();
+                    m_members.pop_back();
+                    delete member;
+                    member = nullptr;
+                }
             }
         }
+        void setLeader(Character *newLeader) { leader = newLeader; }
+        void setMembers(const std::vector<Character *> &newMembers) { m_members = newMembers; }
+        const std::vector<Character *> &getMembers() const { return m_members; }
 
-        void add(Character *member) ;
+        void add(Character *member);
+        Character* findNewTarget(Team *enemyTeam);
 
-        int stillAlive() ;
+        int stillAlive();
 
-        void print() const ;
+        void print() const;
 
         void attack(Team *enemyTeam);
-
-
+         void setisDead()
+        {
+            isDead = true;
+        }
+        bool getisDead()
+        {
+            return isDead;
+        }
     };
 }
+#endif

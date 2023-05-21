@@ -12,17 +12,18 @@ namespace ariel
         // {
         //     return "N";
         // }
-         std::string print() const override
+        std::string print() const override
         {
             std::ostringstream oss;
 
             if (getHitPoints() > 0)
             {
-                oss << "name: " << getName() << " HitPoints: " << getHitPoints()<< " Location: " << getLocation() << std::endl;
+                oss << "name: " << getName() << " HitPoints: " << getHitPoints() << " Location: " << getLocation() << std::endl;
             }
             else
             {
-                oss << "N" << "name: "
+                oss << "N "
+                    << "name: "
                     << "(" << getName() << ")"
                     << ", Location: " << getLocation() << std::endl;
             }
@@ -32,20 +33,43 @@ namespace ariel
         void move(Character *enemy)
         {
             Point enemyLoc = enemy->getLocation();
-            Point NinjaLoc = getLocation();
+            Point ninjaLoc = getLocation();
+            double distance = ninjaLoc.distance(enemyLoc);
 
-            if (NinjaLoc.distance(enemyLoc) >= getSpeed())
+            if (distance >= getSpeed())
             {
-                Point newLoc = Point::moveTowards(NinjaLoc, enemyLoc, getSpeed());
+                Point newLoc = Point::moveTowards(ninjaLoc, enemyLoc, getSpeed());
                 setLocation(newLoc);
+            }
+            else
+            {
+                // Handle the case when the distance is less than the speed
+                // Move directly to the enemy's location or apply another logic based on your requirements
+                // For example:
+                setLocation(enemyLoc);
             }
         }
 
         void slash(Character *target)
         {
-            if (isAlive() && getLocation().distance(target->getLocation()) > 1)
+            if (target == this)
             {
+                std::__throw_runtime_error("self atack");
+            }
+            if (isAlive() && getLocation().distance(target->getLocation()) < 1)
+            {
+                if (!target->isAlive())
+                {
+                    std::__throw_runtime_error("cant attack dead Character");
+                }
                 target->setHitPoints(target->getHitPoints() - 40);
+            }
+            else if (!isAlive())
+            {
+
+                {
+                    std::__throw_runtime_error("dead Character cant attack ");
+                }
             }
         }
 
@@ -58,6 +82,5 @@ namespace ariel
             this->speed = speed;
         }
     };
-
 }
 #endif

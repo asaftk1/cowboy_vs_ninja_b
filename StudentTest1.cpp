@@ -447,7 +447,9 @@ TEST_SUITE("Battle simulations") {
         team.add(create_oninja(-0.5, -0.5));
         team.add(create_tninja(0.5, 0.5));
         team.add(create_cowboy());
-
+        cout<<"team: ";
+        team.print();
+        cout<<"//////////////////////////"<<endl;
         CHECK_EQ(team.stillAlive(), 5);
 
         auto young_ninja = create_yninja(0, 0);
@@ -464,7 +466,8 @@ TEST_SUITE("Battle simulations") {
         team2.add(cowboy);
 	team2.add(cowboy2);
 	team2.add(cowboy3);
-
+team2.print();
+        cout<<"//////////////////////////"<<endl;
         CHECK_EQ(team2.stillAlive(), 7);
 
         multi_attack(2, team, team2);
@@ -488,6 +491,9 @@ TEST_SUITE("Battle simulations") {
         CHECK_NOTHROW(team.attack(
                 &team2)); // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
         CHECK_FALSE(young_ninja2->isAlive()); // Young ninja should be dead
+        team.print();
+        cout<<"WAZAPPPPP"<<endl;
+        team2.print();
         CHECK_THROWS_AS(team.attack(&team2), std::runtime_error); // Attacking a dead team should throw an exception
     }
 

@@ -6,15 +6,36 @@ using namespace std;
 
 void Cowboy::shoot(Character *target)
 {
-    if(isAlive() && hasboolets()){
+    if (isAlive() && hasboolets())
+    {
+        if(target == this)
+        {
+            std::__throw_runtime_error("self atack");
+        }
+        if (!target->isAlive())
+        {
+            std::__throw_runtime_error("cant attack dead Character");
+        }
         bullets--;
-        int currentHitsPoints= target->getHitPoints();
-        target->setHitPoints(currentHitsPoints-10);
+        int currentHitsPoints = target->getHitPoints();
+        target->setHitPoints(currentHitsPoints - 10);
     }
+    else if (!isAlive())
+    {
 
+        {
+            std::__throw_runtime_error("dead Character cant attack ");
+        }
+    }
 }
 
- void Cowboy::reload()
- {
-    bullets+=6;
- }
+void Cowboy::reload()
+{
+    if(isAlive()){
+    bullets += (6 - bullets);
+
+    }
+    else{
+        std::__throw_runtime_error("dead cowboy cant realod");
+    }
+}

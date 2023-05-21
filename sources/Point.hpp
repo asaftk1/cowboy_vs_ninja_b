@@ -61,7 +61,7 @@ namespace ariel
             return !(*this == other);
         }
         friend std::ostream& operator<<(std::ostream& out, const Point& point) {
-        out << "(" << point.m_x << ", " << point.m_y << ")";
+        out << "(" << point.m_x << " , " << point.m_y << ")";
         return out;
     }
     };

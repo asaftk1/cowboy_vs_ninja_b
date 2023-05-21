@@ -9,6 +9,13 @@ namespace ariel
     int bullets;
 
   public:
+  Cowboy() : Character(),bullets(6)
+  {
+    Point p(0,0);
+    setName("name");
+      setLocation(p);
+      setHitPoints(110);
+  }
     Cowboy(const std::string &name, const Point &location) : Character(), bullets(6)
     {
       setName(name);
@@ -19,10 +26,8 @@ namespace ariel
     {
       return bullets;
     }
-    // std::string getPrefix() const override
-    // {
-    //   return "C";
-    // }
+    
+
     std::string print() const override
     {
       std::ostringstream oss;
@@ -33,7 +38,7 @@ namespace ariel
       }
       else
       {
-        oss << "C"
+        oss << "C "
             << "name: "
             << "(" << getName() << ")"
             << ", Location: " << getLocation() << std::endl;
