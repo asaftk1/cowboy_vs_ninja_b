@@ -5,13 +5,12 @@ namespace ariel
 {
     class Ninja : public Character
     {
+        private:
+        static const int HIT = 40;
         int speed;
 
     public:
-        // std::string getPrefix() const override
-        // {
-        //     return "N";
-        // }
+        
         std::string print() const override
         {
             std::ostringstream oss;
@@ -36,7 +35,7 @@ namespace ariel
             Point ninjaLoc = getLocation();
             double distance = ninjaLoc.distance(enemyLoc);
 
-            if (distance >= getSpeed())
+            if (distance > getSpeed())
             {
                 Point newLoc = Point::moveTowards(ninjaLoc, enemyLoc, getSpeed());
                 setLocation(newLoc);
@@ -48,6 +47,7 @@ namespace ariel
                 // For example:
                 setLocation(enemyLoc);
             }
+            
         }
 
         void slash(Character *target)
@@ -62,7 +62,7 @@ namespace ariel
                 {
                     std::__throw_runtime_error("cant attack dead Character");
                 }
-                target->setHitPoints(target->getHitPoints() - 40);
+                target->hit(HIT);
             }
             else if (!isAlive())
             {
@@ -73,11 +73,11 @@ namespace ariel
             }
         }
 
-        int getSpeed()
+        int getSpeed()const
         {
             return speed;
         }
-        void setSpeed(int speed)
+        void setSpeed(int speed) 
         {
             this->speed = speed;
         }

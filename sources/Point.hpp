@@ -11,8 +11,8 @@ namespace ariel
         double m_y;
 
     public:
-        Point():m_x(0),m_y(0){}
-        Point(double x_pt,const double y_pt) : m_x(x_pt), m_y(y_pt) {}
+        Point() : m_x(0), m_y(0) {}
+        Point(double x_pt, const double y_pt) : m_x(x_pt), m_y(y_pt) {}
 
         double getX() const
         {
@@ -34,36 +34,61 @@ namespace ariel
         {
             std::cout << "(" << m_x << "," << m_y << ")" << std::endl;
         }
-        static Point moveTowards(const Point &source, const Point &target, double distance) 
-        {
-            if(distance < 0){
-                std::__throw_invalid_argument("distance must be possitiv");
-            }
-            double dx_ = target.m_x - source.m_x;
-            double dy_ = target.m_y - source.m_y;
+        // static Point moveTowards(const Point &source, const Point &target, double distance)
+        // {
+        //     if(distance < 0){
+        //         std::__throw_invalid_argument("distance must be possitiv");
+        //     }
+        //     double dx_ = target.m_x - source.m_x;
+        //     double dy_ = target.m_y - source.m_y;
 
-            double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
-            double ratio = distance / length;
+        //     double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
+        //     double ratio = distance / length;
 
-            double newX = source.m_x + dx_ * ratio;
-            double newY = source.m_y + dy_ * ratio;
+        //     double newX = source.m_x + dx_ * ratio;
+        //     double newY = source.m_y + dy_ * ratio;
 
-            return Point(newX, newY);
-            
-        }
-          bool operator==(const Point &other) const
-        {
-            return m_x == other.m_x && m_y == other.m_y;
-        }
+        //     return Point(newX, newY);
 
-        bool operator!=(const Point &other) const
-        {
-            return !(*this == other);
-        }
-        friend std::ostream& operator<<(std::ostream& out, const Point& point) {
+        // }
+    static Point moveTowards(const Point &source, const Point &target, double distance)
+{
+    if (distance < 0)
+    {
+        std::__throw_invalid_argument("distance must be positive");
+    }
+
+    if (source == target)
+    {
+        // Handle the case when the source and target points are the same
+        // Throw an exception or apply another logic based on your requirements
+        std::__throw_invalid_argument("source and target points are the same");
+    }
+
+    double dx_ = target.m_x - source.m_x;
+    double dy_ = target.m_y - source.m_y;
+
+    double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
+    double ratio = distance / length;
+
+    double newX = source.m_x + dx_ * ratio;
+    double newY = source.m_y + dy_ * ratio;
+
+    return Point(newX, newY);
+}
+    bool operator==(const Point &other) const
+    {
+        return m_x == other.m_x && m_y == other.m_y;
+    }
+
+    bool operator!=(const Point &other) const
+    {
+        return !(*this == other);
+    }
+    friend std::ostream &operator<<(std::ostream &out, const Point &point)
+    {
         out << "(" << point.m_x << " , " << point.m_y << ")";
         return out;
     }
-    };
-
+};
 }

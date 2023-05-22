@@ -17,8 +17,7 @@ void Cowboy::shoot(Character *target)
             std::__throw_runtime_error("cant attack dead Character");
         }
         bullets--;
-        int currentHitsPoints = target->getHitPoints();
-        target->setHitPoints(currentHitsPoints - 10);
+        target->hit(SHOOT);
     }
     else if (!isAlive())
     {

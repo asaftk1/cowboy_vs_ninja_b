@@ -62,7 +62,7 @@ void Team::attack(Team *enemyTeam)
         }
         for (const auto &member : m_members)
         {
-            
+
             Ninja *ninja = dynamic_cast<Ninja *>(member);
             if (ninja)
             {
@@ -87,16 +87,21 @@ void Team::attack(Team *enemyTeam)
 
     for (const auto &member : m_members)
     {
-        if(enemyTeam->stillAlive() == 0)
-            {
-                return;
-            }
-        if (member->isAlive() && target && target->isAlive())
+        if (enemyTeam->stillAlive() == 0)
         {
-            
-            Cowboy *cowboy = dynamic_cast<Cowboy *>(member);
-            if (cowboy)
+            return;
+        }
+        if (!target->isAlive())
+        {
+            target = findNewTarget(enemyTeam);
+        }
+        Cowboy *cowboy = dynamic_cast<Cowboy *>(member);
+        if (cowboy)
+        {
+
+            if (member->isAlive() && target && target->isAlive())
             {
+
                 if (cowboy->hasboolets())
                 {
                     cowboy->shoot(target);
@@ -107,24 +112,25 @@ void Team::attack(Team *enemyTeam)
                 }
             }
         }
-        else
-        {
-           target = findNewTarget(enemyTeam);
-        }
     }
 
     for (const auto &member : m_members)
     {
-        if(enemyTeam->stillAlive() == 0)
-            {
-                return;
-            }
-        if (member->isAlive() && target && target->isAlive())
+        if (enemyTeam->stillAlive() == 0)
         {
-            // The member is a Ninja
-            Ninja *ninja = dynamic_cast<Ninja *>(member);
-            if (ninja)
+            return;
+        }
+        if (!target->isAlive())
+        {
+            target = findNewTarget(enemyTeam);
+        }
+        // The member is a Ninja
+        Ninja *ninja = dynamic_cast<Ninja *>(member);
+        if (ninja)
+        {
+            if (member->isAlive() && target && target->isAlive())
             {
+
                 if (ninja->distance(target) < 1.0)
                 {
                     ninja->slash(target);
@@ -135,10 +141,6 @@ void Team::attack(Team *enemyTeam)
                     ninja->move(target);
                 }
             }
-        }
-        else
-        {
-           target =  findNewTarget(enemyTeam);
         }
     }
 }

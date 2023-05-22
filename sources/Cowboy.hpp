@@ -6,27 +6,24 @@ namespace ariel
 {
   class Cowboy : public Character
   {
+    static const int MAX_BULLETS = 6;
+    static const int HIT_POINTS = 110;
+    static const int SHOOT = 10;
+
     int bullets;
 
   public:
-  Cowboy() : Character(),bullets(6)
-  {
-    Point p(0,0);
-    setName("name");
-      setLocation(p);
-      setHitPoints(110);
-  }
-    Cowboy(const std::string &name, const Point &location) : Character(), bullets(6)
+    Cowboy(const std::string &name, const Point &location) : bullets(MAX_BULLETS)
     {
       setName(name);
       setLocation(location);
-      setHitPoints(110);
+      setHitPoints(HIT_POINTS);
     }
-    int getbullets()
+
+    int getbullets() const
     {
       return bullets;
     }
-    
 
     std::string print() const override
     {

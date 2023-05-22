@@ -23,7 +23,7 @@ namespace ariel
     public:
         Team(Character *initialMember)
         {
-            if(initialMember->getisLeader())
+            if (initialMember->getisLeader())
             {
                 std::__throw_runtime_error("Character cant be leader of two diffrent teams");
             }
@@ -40,8 +40,10 @@ namespace ariel
 
         // Move constructor
         Team(Team &&other) noexcept
-            : m_members(std::move(other.m_members))
+            : m_members(std::move(other.m_members)), leader(other.leader)
         {
+            other.leader = nullptr;
+
             other.m_members.clear();
         }
 
@@ -74,18 +76,19 @@ namespace ariel
         const std::vector<Character *> &getMembers() const { return m_members; }
 
         void add(Character *member);
-        Character* findNewTarget(Team *enemyTeam);
+        Character *findNewTarget(Team *enemyTeam);
+        void findNewLeader();
 
         int stillAlive();
 
         void print() const;
 
         void attack(Team *enemyTeam);
-         void setisDead()
+        void setisDead()
         {
             isDead = true;
         }
-        bool getisDead()
+        bool getisDead() const
         {
             return isDead;
         }

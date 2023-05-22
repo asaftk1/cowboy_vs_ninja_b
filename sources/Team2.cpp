@@ -72,6 +72,14 @@ namespace ariel
 
         for (const auto &member : getMembers())
         {
+            if (enemyTeam->stillAlive() == 0)
+            {
+                return;
+            }
+            if (!target->isAlive())
+            {
+                target = findNewTarget(enemyTeam);
+            }
             if (member->isAlive() && target && target->isAlive())
             {
                 Cowboy *cowboy = dynamic_cast<Cowboy *>(member);
@@ -102,10 +110,6 @@ namespace ariel
                         }
                     }
                 }
-            }
-            else
-            {
-                findNewTarget(enemyTeam);
             }
         }
     }

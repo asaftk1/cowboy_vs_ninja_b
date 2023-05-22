@@ -7,13 +7,17 @@ namespace ariel
 {
     class OldNinja : public Ninja
     {
+        private:
+        static const int HIT_POINTS = 150;
+        static const int SPEED = 8;
+
     public:
         OldNinja(const std::string &name, const Point &location) : Ninja()
         {
             setName(name);
             setLocation(location);
-            setHitPoints(150);
-            setSpeed(8);
+            setHitPoints(HIT_POINTS);
+            setSpeed(SPEED);
         }
     };
 }

@@ -37,41 +37,34 @@ namespace ariel
 
         virtual std::string print() const = 0;
 
-      
-        bool isAlive()
+        bool isAlive() const
         {
-            if (HitPoints > 0)
-            {
-                return true;
-            }
-            return false;
+            return (HitPoints > 0);
         }
         // virtual
         double distance(Character *other)
         {
             return m_location.distance(other->getLocation());
         }
-        // virtual
+    
         void hit(int descore)
         {
-            if(descore < 0 )
+            if (descore < 0)
             {
                 std::__throw_invalid_argument("input must be possitiv");
             }
             HitPoints -= descore;
         }
 
-        // virtual
+        
         std::string getName() const
         {
             return m_name;
         }
-        // virtual
         Point getLocation() const
         {
             return m_location;
         }
-        // virtual
         int getHitPoints() const
         {
             return HitPoints;
@@ -88,11 +81,11 @@ namespace ariel
         {
             isPartOfTeam = true;
         }
-        bool getisLeader()
+        bool getisLeader()const
         {
             return isLeader;
         }
-        bool getisPartOfGroup()
+        bool getisPartOfGroup()const
         {
             return isPartOfTeam;
         }
