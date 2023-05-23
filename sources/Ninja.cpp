@@ -26,7 +26,7 @@ void Ninja::slash(Character *target)
         }
     }
 }
-
+// move function is used whenever the target distance from the ninja in more then 1 meter
 void Ninja::move(Character *enemy)
 {
     Point enemyLoc = enemy->getLocation();
@@ -43,8 +43,8 @@ void Ninja::move(Character *enemy)
         setLocation(enemyLoc);
     }
 }
-       
-std::string Ninja::print() const 
+// overid the Character print function in order to add N at the begining of the print
+std::string Ninja::print() const
 {
     std::ostringstream oss;
 

@@ -4,12 +4,12 @@ using namespace ariel;
 using namespace std;
 /*
     For the SmartTeam attack :
-        1)  first we set for every Character in the team a taget to slash - going over the EnemyTeam
+        1)  first we set for every Character in the team a taget to atack - going over the EnemyTeam
             ## find for every Ninja her closest target
             ## find the Character with the smallest amount of HitPoints and set him as a target
                for all the cowboys in the team
 
-        2)
+        2)  atack while the target is alive when the target is dead , find new target as before.
 */
 SmartTeam::SmartTeam(Character *initialMember) : Team2(initialMember)
 {

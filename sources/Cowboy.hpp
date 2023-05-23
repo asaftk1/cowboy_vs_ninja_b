@@ -50,7 +50,6 @@ namespace ariel
     {
       return bullets > 0;
     }
-
     void reload();
   };
 

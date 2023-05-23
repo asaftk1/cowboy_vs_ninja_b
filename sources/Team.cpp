@@ -35,7 +35,7 @@ void Team::attack(Team *enemyTeam)
     }
     
     /// find new leader if the leader is not alive
-    /// go over the Cowboys in the team
+    /// go over the Cowboys in the team and then going over the ninja's
 
     if (!leader->isAlive())
     {
