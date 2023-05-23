@@ -3,20 +3,21 @@
 #include "Ninja.hpp"
 namespace ariel
 {
-     class TrainedNinja : public Ninja
+    class TrainedNinja : public Ninja
     {
-        private:
+    private:
         static const int HIT_POINTS = 120;
         static const int SPEED = 12;
 
     public:
-        TrainedNinja(const std::string &name, const Point &location):Ninja()
+        TrainedNinja(const std::string &name, const Point &location) : Ninja()
         {
-             setName(name);
+            setName(name);
             setLocation(location);
             setHitPoints(HIT_POINTS);
             setSpeed(SPEED);
+            setNinjaTarget(nullptr);
         }
     };
-} 
-#endif  // TRAINEDNINJA_HPP
+}
+#endif // TRAINEDNINJA_HPP

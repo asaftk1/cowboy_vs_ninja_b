@@ -30,14 +30,14 @@ namespace ariel
     // Override the attack function
     void Team2::attack(Team *enemyTeam)
     {
+        if (stillAlive() == 0)
+            return;
+
         if (enemyTeam == nullptr)
         {
             std::__throw_invalid_argument("send nullptr");
         }
-        if (stillAlive() == 0)
-        {
-            std::__throw_runtime_error("team is dead");
-        }
+
         if (enemyTeam->stillAlive() == 0)
         {
             std::__throw_runtime_error("team is dead");
@@ -136,7 +136,5 @@ namespace ariel
         }
         return target;
     }
-
-    // Define any additional member functions or variables specific to Team2
 
 }

@@ -33,6 +33,7 @@ namespace ariel
       {
         oss << "name: " << getName() << " HitPoints: " << getHitPoints() << " Location: " << getLocation() << std::endl;
       }
+      //if the cowboy is dead
       else
       {
         oss << "C "

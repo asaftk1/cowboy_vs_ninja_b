@@ -34,61 +34,44 @@ namespace ariel
         {
             std::cout << "(" << m_x << "," << m_y << ")" << std::endl;
         }
-        // static Point moveTowards(const Point &source, const Point &target, double distance)
-        // {
-        //     if(distance < 0){
-        //         std::__throw_invalid_argument("distance must be possitiv");
-        //     }
-        //     double dx_ = target.m_x - source.m_x;
-        //     double dy_ = target.m_y - source.m_y;
 
-        //     double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
-        //     double ratio = distance / length;
+        static Point moveTowards(const Point &source, const Point &target, double distance)
+        {
+            if (distance < 0)
+            {
+                std::__throw_invalid_argument("distance must be positive");
+            }
 
-        //     double newX = source.m_x + dx_ * ratio;
-        //     double newY = source.m_y + dy_ * ratio;
+            if (source == target)
+            {
+                std::__throw_invalid_argument("source and target points are the same");
+            }
 
-        //     return Point(newX, newY);
+            double dx_ = target.m_x - source.m_x;
+            double dy_ = target.m_y - source.m_y;
 
-        // }
-    static Point moveTowards(const Point &source, const Point &target, double distance)
-{
-    if (distance < 0)
-    {
-        std::__throw_invalid_argument("distance must be positive");
-    }
+            double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
+            double ratio = distance / length;
 
-    if (source == target)
-    {
-        // Handle the case when the source and target points are the same
-        // Throw an exception or apply another logic based on your requirements
-        std::__throw_invalid_argument("source and target points are the same");
-    }
+            double newX = source.m_x + dx_ * ratio;
+            double newY = source.m_y + dy_ * ratio;
 
-    double dx_ = target.m_x - source.m_x;
-    double dy_ = target.m_y - source.m_y;
+            return Point(newX, newY);
+        }
 
-    double length = std::sqrt(dx_ * dx_ + dy_ * dy_);
-    double ratio = distance / length;
+        bool operator==(const Point &other) const
+        {
+            return m_x == other.m_x && m_y == other.m_y;
+        }
 
-    double newX = source.m_x + dx_ * ratio;
-    double newY = source.m_y + dy_ * ratio;
-
-    return Point(newX, newY);
-}
-    bool operator==(const Point &other) const
-    {
-        return m_x == other.m_x && m_y == other.m_y;
-    }
-
-    bool operator!=(const Point &other) const
-    {
-        return !(*this == other);
-    }
-    friend std::ostream &operator<<(std::ostream &out, const Point &point)
-    {
-        out << "(" << point.m_x << " , " << point.m_y << ")";
-        return out;
-    }
-};
+        bool operator!=(const Point &other) const
+        {
+            return !(*this == other);
+        }
+        friend std::ostream &operator<<(std::ostream &out, const Point &point)
+        {
+            out << "(" << point.m_x << " , " << point.m_y << ")";
+            return out;
+        }
+    };
 }

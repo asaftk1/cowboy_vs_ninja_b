@@ -21,7 +21,6 @@ void Cowboy::shoot(Character *target)
     }
     else if (!isAlive())
     {
-
         {
             std::__throw_runtime_error("dead Character cant attack ");
         }

@@ -24,18 +24,16 @@ void Team::add(Character *member)
 
 void Team::attack(Team *enemyTeam)
 {
+    if(stillAlive() == 0 )return;
     if (enemyTeam == nullptr)
     {
         std::__throw_invalid_argument("send nullptr");
     }
     if (enemyTeam->stillAlive() == 0)
     {
-        std::__throw_runtime_error("team is dead");
+        std::__throw_runtime_error("Enemyteam is dead");
     }
-    if (stillAlive() == 0)
-    {
-        std::__throw_runtime_error("team is dead");
-    }
+    
     /// find new leader if the leader is not alive
     /// go over the Cowboys in the team
 

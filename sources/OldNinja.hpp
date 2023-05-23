@@ -18,6 +18,7 @@ namespace ariel
             setLocation(location);
             setHitPoints(HIT_POINTS);
             setSpeed(SPEED);
+            setNinjaTarget(nullptr);
         }
     };
 }
